@@ -1,0 +1,81 @@
+{
+  "name": "@alertnew/recipes",
+  "version": "1.0.5",
+  "description": "Open-source web extraction recipes for alert.new - track prices, stock, GitHub releases, YouTube stats & more. Free website monitoring at https://alert.new",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "npx tsx scripts/validate-recipes.ts",
+    "test:live": "npx tsx scripts/test-live-urls.ts",
+    "test:changed": "npx tsx scripts/test-changed-recipes.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "alert",
+    "alerts",
+    "monitoring",
+    "web-scraping",
+    "scraping",
+    "price-tracking",
+    "price-alert",
+    "price-drop",
+    "stock-alert",
+    "back-in-stock",
+    "website-monitoring",
+    "web-monitoring",
+    "change-detection",
+    "amazon-price-tracker",
+    "ebay-tracker",
+    "github-releases",
+    "youtube-stats",
+    "reddit-tracker",
+    "notification",
+    "automation",
+    "extractors",
+    "recipes"
+  ],
+  "author": "alert.new <hello@alert.new> (https://alert.new)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alert-new/recipes.git"
+  },
+  "homepage": "https://alert.new",
+  "bugs": {
+    "url": "https://github.com/alert-new/recipes/issues"
+  },
+  "funding": {
+    "type": "website",
+    "url": "https://alert.new"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

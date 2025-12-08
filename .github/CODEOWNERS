@@ -1,0 +1,8 @@
+# Default - all PRs need review from alertnew team
+* @alertnew
+
+# Core files require extra scrutiny
+src/types.ts @alertnew
+src/helpers.ts @alertnew
+src/index.ts @alertnew
+src/validate.ts @alertnew
