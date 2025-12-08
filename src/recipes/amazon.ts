@@ -30,6 +30,9 @@ export const amazonRecipe = defineRecipe({
 
 	match: /amazon\.(com|co\.uk|de|fr|es|it|ca|com\.au|co\.jp|in|com\.mx|com\.br|nl|se|pl|be|sg|ae|sa|eg|com\.tr)/i,
 
+	// Amazon has aggressive bot detection - requires browser rendering for reliable extraction
+	requiresJs: true,
+
 	fields: {
 		title: {
 			type: 'string',
