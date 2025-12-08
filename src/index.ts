@@ -13,7 +13,6 @@ export { ebayRecipe } from './recipes/ebay'
 export { githubRecipe } from './recipes/github'
 export { hackernewsRecipe } from './recipes/hackernews'
 export { npmRecipe } from './recipes/npm'
-export { productHuntRecipe } from './recipes/product-hunt'
 export { redditRecipe } from './recipes/reddit'
 export { twitterRecipe } from './recipes/twitter'
 export { youtubeRecipe } from './recipes/youtube'
@@ -25,7 +24,6 @@ import { ebayRecipe } from './recipes/ebay'
 import { githubRecipe } from './recipes/github'
 import { hackernewsRecipe } from './recipes/hackernews'
 import { npmRecipe } from './recipes/npm'
-import { productHuntRecipe } from './recipes/product-hunt'
 import { redditRecipe } from './recipes/reddit'
 import { twitterRecipe } from './recipes/twitter'
 import { youtubeRecipe } from './recipes/youtube'
@@ -42,7 +40,6 @@ export const recipes: Recipe[] = [
 	githubRecipe,
 	npmRecipe,
 	// Social
-	productHuntRecipe,
 	redditRecipe,
 	twitterRecipe,
 	youtubeRecipe,
