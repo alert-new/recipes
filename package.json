@@ -1,6 +1,6 @@
 {
   "name": "@alertnew/recipes",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Open-source web extraction recipes for alert.new - track prices, stock, GitHub releases, YouTube stats & more. Free website monitoring at https://alert.new",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
