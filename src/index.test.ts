@@ -8,12 +8,12 @@ import {
 } from './index'
 
 describe('recipes', () => {
-	it('exports 9 site-specific recipes', () => {
-		expect(recipes.length).toBe(9)
+	it('exports 8 site-specific recipes', () => {
+		expect(recipes.length).toBe(8)
 	})
 
-	it('exports 10 total recipes including generic', () => {
-		expect(allRecipes.length).toBe(10)
+	it('exports 9 total recipes including generic', () => {
+		expect(allRecipes.length).toBe(9)
 	})
 
 	it('all recipes have required metadata', () => {
