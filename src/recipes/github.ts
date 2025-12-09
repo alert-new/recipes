@@ -31,19 +31,8 @@ export const githubRecipe = defineRecipe({
 
 	match: /^https?:\/\/(www\.)?github\.com\/[^/]+\/[^/]+\/?$/i,
 
-	// Use GitHub's public API for reliable data
-	transformUrl: (url: string) => {
-		const match = url.match(/github\.com\/([^/]+)\/([^/]+)/)
-		if (match) {
-			return `https://api.github.com/repos/${match[1]}/${match[2]}`
-		}
-		return url
-	},
-
-	headers: {
-		'Accept': 'application/vnd.github.v3+json',
-		'User-Agent': 'alert.new',
-	},
+	// GitHub blocks simple fetches, use browser rendering
+	requiresJs: true,
 
 	fields: {
 		title: {
