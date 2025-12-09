@@ -76,6 +76,24 @@ jobs:
     runs-on: ubuntu-latest
     if: success()
     steps:
+      - uses: actions/checkout@v4
+
+      # Poll npm registry until version is available (bypasses cache)
+      - name: Wait for npm propagation
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Waiting for @alertnew/recipes@$VERSION on npm registry..."
+          for i in {1..30}; do
+            if curl -sf "https://registry.npmjs.org/@alertnew%2frecipes/$VERSION" > /dev/null; then
+              echo "Version $VERSION is available!"
+              exit 0
+            fi
+            echo "Attempt $i: Not yet available, waiting 10s..."
+            sleep 10
+          done
+          echo "Error: Timed out waiting for npm"
+          exit 1
+
       # Trigger main site repo workflow via repository_dispatch
       - name: Trigger site redeploy
         run: |
