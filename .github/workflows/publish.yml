@@ -1,18 +1,33 @@
 name: Publish to npm
 
 on:
+  # Auto-publish on merge to main
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'package.json'
+  # Also support manual releases
   release:
     types: [published]
+  # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
+    # Skip if this is a version bump commit (prevent infinite loop)
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     permissions:
-      contents: read
+      contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,6 +50,17 @@ jobs:
 
       - name: Unit tests
         run: npm test
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version (patch)
+        if: github.event_name == 'push'
+        run: |
+          npm version patch -m "chore(release): %s [skip ci]"
+          git push --follow-tags
 
       - name: Publish to npm
         run: npm publish --provenance --access public
