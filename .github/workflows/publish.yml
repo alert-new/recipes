@@ -36,6 +36,10 @@ jobs:
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
+      # Ensure npm 11.5.1+ for OIDC trusted publishing
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -62,18 +66,21 @@ jobs:
           npm version patch -m "chore(release): %s [skip ci]"
           git push --follow-tags
 
+      # Uses OIDC trusted publishing - no NPM_TOKEN needed
+      # Requires configuring trusted publisher at npmjs.com/package/@alertnew/recipes/access
       - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
 
   notify:
     needs: publish
     runs-on: ubuntu-latest
     if: success()
     steps:
-      - name: Trigger alert.new redeploy
+      # Trigger main site repo workflow via repository_dispatch
+      - name: Trigger site redeploy
         run: |
           curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.DEPLOY_WEBHOOK_TOKEN }}" \
-            "${{ secrets.DEPLOY_WEBHOOK_URL }}" || true
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.DEPLOY_TOKEN }}" \
+            "https://api.github.com/repos/${{ secrets.DEPLOY_REPO }}/dispatches" \
+            -d '{"event_type":"recipes-updated"}' || true
