@@ -31,8 +31,8 @@ export const githubRecipe = defineRecipe({
 
 	match: /^https?:\/\/(www\.)?github\.com\/[^/]+\/[^/]+\/?$/i,
 
-	// GitHub blocks simple fetches, use browser rendering
-	requiresJs: true,
+	// GitHub public pages are accessible via simple fetch
+	// requiresJs: true,  // Disabled - causes API rate limit issues
 
 	fields: {
 		title: {
