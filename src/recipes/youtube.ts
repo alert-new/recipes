@@ -2,6 +2,8 @@ import { defineRecipe, type ExtractedData } from '../types'
 import { extractFirst, parseAbbreviatedNumber, decodeHtmlEntities, extractJsonLd, extractMetaTags } from '../helpers'
 
 export const youtubeRecipe = defineRecipe({
+	requiresJs: true,
+
 	meta: {
 		slug: 'youtube',
 		name: 'YouTube Video',
