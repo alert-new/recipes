@@ -32,6 +32,8 @@ export const youtubeRecipe = defineRecipe({
 
 	match: /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\//i,
 
+	requiresJs: true,
+
 	fields: {
 		title: {
 			type: 'string',
